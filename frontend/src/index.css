@@ -8,3 +8,151 @@ body,
   box-sizing: border-box;
   font-family: sans-serif;
 }
+.sidebar-container {
+  width: 240px;
+  height: calc(100vh - 36px);
+  overflow-y: auto;
+  border-right: 1px solid #e5e5e5;
+  background-color: #f9f9f9;
+  padding: 2px 6px;
+  box-shadow: inset -1px 0 0 #eee;
+}
+
+.sidebar-collapse .ant-collapse-header {
+  padding: 4px 10px !important;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  min-height: 28px;
+}
+
+.sidebar-collapse .ant-collapse-item {
+  margin-bottom: 4px;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.sidebar-db-title {
+  font-size: 12px;
+  font-weight: 400 !important;
+  display: flex;
+  align-items: center;
+  color: #333;
+  cursor: pointer;
+}
+
+.active-db{
+  font-weight: 900 !important;
+  color: #000;
+  
+}
+.active-table{
+  font-weight: 900;
+  color:#000
+  
+}
+
+.table-list {
+  list-style: none;
+  padding-left: 12px;
+  margin: 4px 0;
+}
+
+.table-item {
+  padding: 4px 0;
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.table-item:hover {
+  background-color: #e6f7ff;
+  padding-left: 4px;
+  border-left: 3px solid #1890ff;
+}
+
+.no-tables {
+  font-size: 12px;
+  color: #999;
+  font-style: italic;
+  padding-left: 16px;
+  margin: 4px 0;
+}
+
+/* CSS */
+.tab-btn {
+  height: 20px;
+  line-height: 18px;
+  padding: 0 6px 0 8px;
+  font-size: 12px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: #333;
+}
+
+.tab-btn.active {
+  background-color: #1890ff;
+  color: #fff;
+  border-color: #1890ff;
+}
+.tab-btn:hover {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+  color: #333;
+}
+
+.close-icon {
+  font-size: 10px;
+  color: #888;
+  cursor: pointer;
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.close-icon:hover {
+  color: #f5222d;
+}
+
+.tab-btn:focus {
+  outline: none;
+}
+
+.add-tab-btn {
+  height: 20px;
+  width: 20px;
+  font-size: 14px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  margin-left: 4px;
+}
+
+.add-tab-btn:hover {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+  color: #1890ff;
+}
+
+.add-tab-btn:focus {
+  outline: none;
+}
+
+
+
+

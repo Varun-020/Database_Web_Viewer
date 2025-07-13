@@ -1,20 +1,27 @@
 const DBRepository = require("../repositories/db.repository.js");
-const Sequelize = require("sequelize");
-const jwt = require("jsonwebtoken");
-
 class DBService {
   constructor(req) {
     this.req = req;
     this.repository = new DBRepository(req);
   }
 
-   async showDatabaseListWithTableNames() {
+  async showDatabaseListWithTableNames() {
     try {
-      let data = await this.repository.getAllDatabaseNames();
-      console.log(data);
-      
-      const explorer = this.groupByDatabase(data);
-      return explorer;
+      let databasesResult = await this.repository.getAllDatabaseNames();
+      const databases = databasesResult.map((row) => row.name);
+      let result = [];
+      for (const dbName of databases) {
+        const tablesResult = await this.repository.getTableNamesForDatabase(
+          dbName
+        );
+        const tables = tablesResult.map((row) => row.name);
+        result.push({
+          database: dbName,
+          tables,
+        });
+      }
+
+      return result;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -32,8 +39,6 @@ class DBService {
       tables,
     }));
   };
-
- 
 }
 
 module.exports = DBService;

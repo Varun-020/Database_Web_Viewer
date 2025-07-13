@@ -1,59 +1,64 @@
 import { Collapse } from "antd";
+import { DatabaseOutlined, TableOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveDatabase, setActiveTable } from "../../slices/DatabaseSlice";
 const { Panel } = Collapse;
 
 const Sidebar = ({ databases }) => {
+  const dispatch = useDispatch();
+  const { activeDatabase, activeTable } = useSelector((state) => state.db);
+
+  const handleTableClick = (database, tableName) => {
+    dispatch(setActiveDatabase(database));
+    dispatch(setActiveTable(tableName));
+  };
+
   return (
-    <div
-      style={{
-        width: 220,
-        overflowY: "auto",
-        borderRight: "1px solid #f0f0f0",
-        padding: "8px 4px",
-        background: "#fff",
-      }}
-    >
+    <div className="sidebar-container">
       <Collapse
         accordion
         bordered={false}
-        style={{ backgroundColor: "transparent" }}
         expandIconPosition="start"
+        className="sidebar-collapse"
       >
         {databases.map(({ database, tables }) => (
           <Panel
-            header={<span style={{ fontSize: 13 }}>{database}</span>}
+            header={
+              <span
+                className={
+                  activeDatabase == database
+                    ? "sidebar-db-title active-db"
+                    : "sidebar-db-title"
+                }
+                onClick={() => dispatch(setActiveDatabase(database))}
+              >
+                <DatabaseOutlined style={{ marginRight: 6 }} />
+                {database}
+              </span>
+            }
             key={database}
-            style={{
-              marginBottom: 4,
-              padding: "2px !important",
-            }}
+            className="sidebar-panel"
+            collapsible="icon"
           >
             {tables.length > 0 ? (
-              <ul style={{ listStyle: "none", paddingLeft: 12, margin: 0 }}>
+              <ul className="table-list">
                 {tables.map((table) => (
                   <li
                     key={table}
-                    style={{
-                      padding: "2px 0",
-                      fontSize: 12,
-                      color: "#555",
-                      cursor: "pointer",
-                    }}
+                    className={
+                      activeTable == table
+                        ? "table-item active-db"
+                        : "table-item"
+                    }
+                    onClick={() => handleTableClick(database, table)}
                   >
+                    <TableOutlined style={{ marginRight: 6 }} />
                     {table}
                   </li>
                 ))}
               </ul>
             ) : (
-              <div
-                style={{
-                  fontSize: 12,
-                  color: "#999",
-                  fontStyle: "italic",
-                  paddingLeft: 8,
-                }}
-              >
-                No tables
-              </div>
+              <div className="no-tables">No tables</div>
             )}
           </Panel>
         ))}
